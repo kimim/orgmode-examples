@@ -1,0 +1,142 @@
+#+TITLE: plantuml in orgmode
+#+SUBTITLE: drawing in plain text
+#+STARTUP: content
+#+OPTIONS: H:2 toc:t num:t date:t author:t
+#+BEAMER_THEME: kimim
+
+* Introduction
+** PlantUML in Orgmode
+This file demostrates:
+- How to draw in UML with plantuml in orgmode
+- And create PDF slides from orgmode
+
+** Emacs and Orgmode version
+Firstly, let's check Emacs[fn:1] and Orgmode[fn:2] version:
+
+#+begin_src emacs-lisp :exports both
+(concat  (emacs-version)
+         "\nOrgmode " (org-version))
+#+end_src
+
+#+RESULTS:
+: GNU Emacs 28.0.50 (build 7, x86_64-w64-mingw32)
+:  of 2021-07-15
+: Orgmode 9.4.4
+
+** Emacs Config
+
+You may need to use my emacs config:
+
+#+begin_src shell
+# backup existing emacs config
+cd ~ && mv .emacs .emacs-backup && mv .emacs.d .emacs.d-backup
+# clone this config
+git clone https://github.com/kimim/kimim-emacs
+# copy default .emacs to ~
+cp kimim-emacs/.emacs ~
+#+end_src
+
+** Install PlantUML
+Download plantuml.jar[fn:3], and set jar-path:
+
+#+begin_src emacs-lisp :exports code
+(require 'url-handlers)
+(require 'ob-plantuml)
+(url-copy-file "https://nchc.dl.sourceforge.net/project/plantuml/plantuml.jar"
+               "./plantuml.jar" t)
+(setq org-plantuml-jar-path "./plantuml.jar")
+#+end_src
+
+** TexLive and Beamer Theme
+Install TexLive[fn:4] to ~<texlive-path>~ and clone beamertheme-kimim[fn:5], and
+update \TeX{} cache:
+
+#+begin_src shell :results none
+git clone https://github.com/kimim/beamertheme-kimim \
+    <texlive-path>/texmf-local/tex/latex/beamertheme-kimim
+mktexlsr
+#+end_src
+
+* PlantUML Diagrams
+** Sequence Diagram
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+Let's draw a simple sequence diagram with this plantuml code:
+
+#+name: sequence-diagram
+#+begin_src plantuml :exports code :results output silent
+@startuml
+hide footbox
+hide unlinked
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: Another authentication Response
+@enduml
+#+end_src
+
+
+*** diagram                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+begin_src plantuml :noweb yes :file alice-and-bob.svg :output-dir images
+<<sequence-diagram>>
+#+end_src
+
+#+RESULTS:
+[[file:images/alice-and-bob.svg]]
+** Class Diagram
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+A simple class diagram
+
+#+name: class-diagram
+#+begin_src plantuml :exports code :results output silent
+@startuml
+class Car
+Driver - Car : drives >
+Car *- Wheel : have 4 >
+Car -- Person : < owns
+@enduml
+#+end_src
+
+*** diagram                                                           :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+begin_src plantuml :noweb yes :file class-diagram.svg :output-dir images
+<<class-diagram>>
+#+end_src
+
+#+RESULTS:
+[[file:images/class-diagram.svg]]
+
+* Conclusion
+** Key Takeaways
+
+- Emacs is a long lasting, and wonderful text editor
+- Orgmode is an awesome plain text format
+- \LaTeX{} and Beamer is great typesetting tool
+- Thus, drawing plantuml diagram with these tools is cool!
+
+* Appendix                                                       :B_appendix:
+:PROPERTIES:
+:BEAMER_env: appendix
+:END:
+
+* Footnotes
+
+[fn:1] https://www.gnu.org/software/emacs/
+
+[fn:2] https://orgmode.org/
+
+[fn:3] https://plantuml.com/
+
+[fn:4] http://tug.org/texlive/
+
+[fn:5] https://github.com/kimim/beamertheme-kimim
