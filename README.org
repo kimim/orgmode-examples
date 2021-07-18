@@ -23,8 +23,7 @@ Firstly, let's check Emacs[fn:1] and Orgmode[fn:2] version:
 :  of 2021-07-15
 : Orgmode 9.4.4
 
-** Emacs Config
-
+** Emacs Configuration
 You may need to use my emacs config:
 
 #+begin_src shell
@@ -36,7 +35,7 @@ git clone https://github.com/kimim/kimim-emacs
 cp kimim-emacs/.emacs ~
 #+end_src
 
-** Install PlantUML
+** PlantUML
 Download plantuml.jar[fn:3], and set jar-path:
 
 #+begin_src emacs-lisp :exports code
@@ -56,6 +55,18 @@ git clone https://github.com/kimim/beamertheme-kimim \
     <texlive-path>/texmf-local/tex/latex/beamertheme-kimim
 mktexlsr
 #+end_src
+
+** Inkscape
+Install Inkscape[fn:6] to convert SVG image to PDF.
+
+This is inkscape version on my Windows 10:
+
+#+begin_src shell :exports both :results pp
+inkscape --version
+#+end_src
+
+#+RESULTS:
+: Inkscape 1.0.2-2 (e86c870879, 2021-01-15)
 
 * PlantUML Diagrams
 ** Sequence Diagram
@@ -132,12 +143,14 @@ Car -- Person : < owns
 
 * Footnotes
 
-[fn:1] https://www.gnu.org/software/emacs/
+[fn:1] https://www.gnu.org/software/emacs
 
-[fn:2] https://orgmode.org/
+[fn:2] https://orgmode.org
 
-[fn:3] https://plantuml.com/
+[fn:3] https://plantuml.com
 
-[fn:4] http://tug.org/texlive/
+[fn:4] http://tug.org/texlive
 
 [fn:5] https://github.com/kimim/beamertheme-kimim
+
+[fn:6] https://inkscape.org
