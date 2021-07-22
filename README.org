@@ -26,7 +26,7 @@ Firstly, let's check Emacs[fn:1] and Orgmode[fn:2] version:
 ** Emacs Configuration
 You may need to use my emacs config:
 
-#+begin_src shell
+#+begin_src shell :exports code
 # backup existing emacs config
 cd ~ && mv .emacs .emacs-backup && mv .emacs.d .emacs.d-backup
 # clone this config
@@ -50,7 +50,7 @@ Download plantuml.jar[fn:3], and set jar-path:
 Install TexLive[fn:4] to ~<texlive-path>~ and clone beamertheme-kimim[fn:5], and
 update \TeX{} cache:
 
-#+begin_src shell :results none
+#+begin_src shell :exports code
 git clone https://github.com/kimim/beamertheme-kimim \
     <texlive-path>/texmf-local/tex/latex/beamertheme-kimim
 mktexlsr
