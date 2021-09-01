@@ -1,30 +1,27 @@
-#+TITLE: plantuml in orgmode
-#+SUBTITLE: drawing in plain text
+#+TITLE: orgmode examples
+#+SUBTITLE: draw, code evaluation and present in orgmode with \LaTeX{} beamer
 #+STARTUP: content
 #+OPTIONS: H:2 toc:t num:t date:t author:t
 #+BEAMER_THEME: kimim
 
 * Introduction
-** PlantUML in Orgmode
-This file demostrates:
-- How to draw in UML with plantuml in orgmode
-- And create PDF slides from orgmode
+** Purpose
+To evaluate many features of orgmode, such as
+- drawing with code
+- evaluating results of code snippets
+- exporting orgmode file to pdf slides
+** How
+Following tools are used in this file:
+- [[https://www.msys2.org/][MSYS2]] provides many tools and libraries, [[https://www.graalvm.org/][GraalVM]] JDK
+- [[https://www.gnu.org/software/emacs/][GNU Emacs]] with [[https://github.com/kimim/kimim-emacs][kimim-emacs]] configuration
+- [[https://orgmode.org/][Org Mode]], including org-babel, org-export
+- [[http://tug.org/texlive/][TexLive]] with [[https://github.com/kimim/beamertheme-kimim][beamertheme-kimim]] style
+- [[https://plantuml.com/][PlantUML]], [[https://graphviz.org][Graphviz]], \LaTeX{} [[https://www.ctan.org/pkg/pgf][tikz]] package
+- [[https://inkscape.org/][Inkscape]] to convert svg to pdf, during orgmode-pdf exporting
 
-** Emacs and Orgmode version
-Firstly, let's check Emacs[fn:1] and Orgmode[fn:2] version:
-
-#+begin_src emacs-lisp :exports both
-(concat  (emacs-version)
-         "\nOrgmode " (org-version))
-#+end_src
-
-#+RESULTS:
-: GNU Emacs 28.0.50 (build 7, x86_64-w64-mingw32)
-:  of 2021-07-15
-: Orgmode 9.4.4
-
-** Emacs Configuration
-You may need to use my emacs config:
+* Preparation
+** Emacs settings
+You may need to use kimim-emacs configuration:
 
 #+begin_src shell :exports code
 # backup existing emacs config
@@ -35,9 +32,21 @@ git clone https://github.com/kimim/kimim-emacs
 cp kimim-emacs/.emacs ~
 #+end_src
 
-** PlantUML
-Download plantuml.jar[fn:3], and set jar-path:
+** Emacs and Orgmode version
+Firstly, let's check GNU Emacs[fn:1] and Orgmode[fn:2] version:
 
+#+begin_src emacs-lisp :exports both
+(concat  (emacs-version)
+         "\nOrgmode " (org-version))
+#+end_src
+
+#+RESULTS:
+: GNU Emacs 28.0.50 (build 6, x86_64-w64-mingw32)
+:  of 2021-08-31
+: Orgmode 9.4.4
+
+** PlantUML settings in Emacs
+Download plantuml.jar[fn:3], and set jar-path:
 #+begin_src emacs-lisp :exports code
 (require 'url-handlers)
 (require 'ob-plantuml)
@@ -45,6 +54,30 @@ Download plantuml.jar[fn:3], and set jar-path:
                "./plantuml.jar" t)
 (setq org-plantuml-jar-path "./plantuml.jar")
 #+end_src
+** PlantUML version
+Here is the version info on my machine, including JVM, dot and graphviz:
+
+#+begin_src emacs-lisp :exports outputs
+(shell-command-to-string
+ (concat
+  "java -jar " org-plantuml-jar-path " -version"))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+PlantUML version 1.2021.8 (Sat Jun 26 16:20:59 CST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+
+PLANTUML_LIMIT_SIZE: 4096
+
+Dot version: dot - graphviz version 2.44.1 (20200629.0846)
+Installation seems OK. File generation OK
+#+end_example
 
 ** TexLive and Beamer Theme
 Install TexLive[fn:4] to ~<texlive-path>~ and clone beamertheme-kimim[fn:5], and
@@ -56,7 +89,7 @@ git clone https://github.com/kimim/beamertheme-kimim \
 mktexlsr
 #+end_src
 
-** Inkscape
+** Inkscape version
 Install Inkscape[fn:6] to convert SVG image to PDF.
 
 This is inkscape version on my Windows 10:
@@ -87,7 +120,6 @@ Alice -> Bob: Another authentication Request
 Alice <-- Bob: Another authentication Response
 @enduml
 #+end_src
-
 
 *** diagram                                                           :BMCOL:
 :PROPERTIES:
@@ -127,6 +159,41 @@ Car -- Person : < owns
 
 #+RESULTS:
 [[file:images/class-diagram.svg]]
+
+* Tikz
+** tikz diagram
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+name: tikz-triangle
+#+begin_src latex :exports code
+\begin{tikzpicture}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (60, 0);
+  \coordinate (C) at (30, 30);
+  \foreach \density in {20,30,...,80}{%
+    \draw[fill=blue!\density]
+    (A)--(B)--(C)--cycle;
+    \path
+    (A) coordinate (X)
+    -- (B) coordinate[pos=.15](A)
+    -- (C) coordinate[pos=.15](B)
+    -- (X) coordinate[pos=.15](C);
+  }
+\end{tikzpicture}
+#+end_src
+
+*** image                                                             :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+begin_src latex :noweb yes :output-dir images :file triangle.svg :results file raw :exports results
+<<tikz-triangle>>
+#+end_src
+
+#+RESULTS:
+[[file:images/triangle.svg]]
 
 * Conclusion
 ** Key Takeaways
