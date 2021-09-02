@@ -25,7 +25,7 @@ Following tools are used in this file:
 ** Emacs settings
 You may need to use kimim-emacs configuration:
 
-#+begin_src shell :exports code
+#+begin_src shell :exports code :eval no-export
 # backup existing emacs config
 cd ~ && mv .emacs .emacs-backup && mv .emacs.d .emacs.d-backup
 # clone this config
@@ -37,7 +37,7 @@ cp kimim-emacs/.emacs ~
 ** Emacs and Orgmode version
 Firstly, let's check GNU Emacs[fn:1] and Orgmode[fn:2] version:
 
-#+begin_src emacs-lisp :exports both
+#+begin_src emacs-lisp :exports both :eval no-export
 (concat  (emacs-version)
          "\nOrgmode " (org-version))
 #+end_src
@@ -52,7 +52,7 @@ Firstly, let's check GNU Emacs[fn:1] and Orgmode[fn:2] version:
 Install TexLive[fn:4] to ~<texlive-path>~ and clone beamertheme-kimim[fn:5], and
 update \TeX{} cache:
 
-#+begin_src shell :exports code
+#+begin_src shell :exports code :eval no-export
 git clone https://github.com/kimim/beamertheme-kimim \
     <texlive-path>/texmf-local/tex/latex/beamertheme-kimim
 mktexlsr
@@ -63,27 +63,28 @@ Install Inkscape[fn:6] to convert SVG image to PDF.
 
 This is inkscape version on my Windows 10:
 
-#+begin_src shell :exports both :results pp
+#+begin_src shell :exports both :results pp :eval no-export
 inkscape --version
 #+end_src
 
 #+RESULTS:
 : Inkscape 1.0.2-2 (e86c870879, 2021-01-15)
 
-* PlantUML
+* Drawing in code
 ** PlantUML settings in Emacs
-Download plantuml.jar[fn:3], and set jar-path:
-#+begin_src emacs-lisp :exports code
+Download plantuml.jar[fn:3], and set jar-path
+#+begin_src emacs-lisp :exports code :eval no-export
 (require 'url-handlers)
 (require 'ob-plantuml)
 (url-copy-file "https://nchc.dl.sourceforge.net/project/plantuml/plantuml.jar"
                "./plantuml.jar" t)
 (setq org-plantuml-jar-path "./plantuml.jar")
 #+end_src
+
 ** PlantUML version
 Here is the version info on my machine, including JVM, dot and graphviz:
 
-#+begin_src emacs-lisp :exports outputs
+#+begin_src emacs-lisp :exports outputs :eval no-export
 (shell-command-to-string
  (concat
   "java -jar " org-plantuml-jar-path " -version"))
@@ -128,7 +129,7 @@ Alice <-- Bob: Another authentication Response
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-#+begin_src plantuml :noweb yes :file alice-and-bob.svg :output-dir images
+#+begin_src plantuml :noweb yes :file alice-and-bob.svg :output-dir images :eval no-export
 <<sequence-diagram>>
 #+end_src
 
@@ -156,14 +157,13 @@ Car -- Person : < owns
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-#+begin_src plantuml :noweb yes :file class-diagram.svg :output-dir images
+#+begin_src plantuml :noweb yes :file class-diagram.svg :output-dir images :eval no-export
 <<class-diagram>>
 #+end_src
 
 #+RESULTS:
 [[file:images/class-diagram.svg]]
 
-* Tikz
 ** tikz diagram
 *** code                                                              :BMCOL:
 :PROPERTIES:
@@ -191,7 +191,7 @@ Car -- Person : < owns
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-#+begin_src latex :noweb yes :output-dir images :file triangle.svg :results file raw :exports results
+#+begin_src latex :noweb yes :output-dir images :file triangle.svg :results file raw :exports results :eval no-export
 <<tikz-triangle>>
 #+end_src
 
@@ -200,16 +200,21 @@ Car -- Person : < owns
 
 * Org-babel Evaluating Programming Languages
 ** emacs lisp
-#+begin_src emacs-lisp :exports both
+#+begin_src emacs-lisp :exports both :eval no-export
 (emacs-version)
 #+end_src
 
-#+RESULTS:
-: GNU Emacs 28.0.50 (build 6, x86_64-w64-mingw32)
-:  of 2021-08-31
+#+NAME: thisyear
+#+begin_src emacs-lisp :eval no-export
+(decoded-time-year (decode-time (current-time)))
+#+end_src
+
+#+RESULTS: thisyear
+: 2021
+
 
 ** shell
-#+begin_src shell :results verbatim :exports both
+#+begin_src shell :results verbatim :exports both :eval no-export
 sh --version
 #+end_src
 
@@ -223,61 +228,95 @@ sh --version
 
 ** C
 
-#+begin_src C :exports both
-printf("%s is %d years old\n", "C programming language", 2021-1972);
+#+begin_src C :exports both :var year=thisyear :eval no-export
+printf("%s is %d years old\n", "C programming language", year-1972);
 #+end_src
 
 #+RESULTS:
 : C programming language is 49 years old
 
 ** C++
-#+begin_src C++ :exports both :namespaces std :includes <iostream>
-cout << "C++ is " << 2021-1979 << " years old" << endl;
+#+begin_src C++ :exports both :namespaces std :includes <iostream> :var year=thisyear :eval no-export
+cout << "C++ is " << year-1979 << " years old" << endl;
 #+end_src
 
 #+RESULTS:
 : C++ is 42 years old
 
 ** Clojure
+
+#+begin_src clojure :results output :exports both :var year=thisyear :eval no-export
+(println "Clojure is" (- year 2005) "years old")
+#+end_src
+
+#+RESULTS:
+: Clojure is 16 years old
+
 ** ClojureScript
+
+TODO
+#+begin_src clojurescript :exports both :var year=thisyear :eval no-export
+(println "ClojureScript is" (- 2021 2011) "years old")
+#+end_src
+
 ** Java
+
+TODO: can pass variable to java
+
+#+begin_src java :classname Main :exports both :var year=thisyear :eval no-export
+public class Main{
+    public static void main(String[] args){
+        System.out.println("Java is " + (2021-1995) + " years old");
+        return;
+    }
+}
+#+end_src
+
+#+RESULTS:
+: Java is 26 years old
+
 ** Python
 
-#+begin_src shell :exports both
+Check Python version in shell:
+#+begin_src shell :exports both :eval no-export
 python --version
 #+end_src
 
 #+RESULTS:
 : Python 3.9.6
 
-#+begin_src python :results output :exports both
-print("Python in Emacs/orgmode")
+Evaluate Python code:
+#+begin_src python :results output :exports both :var year=thisyear :eval no-export
+print("Python is " + str(year - 1991) + " years old")
 #+end_src
 
 #+RESULTS:
-: Python in Emacs/orgmode
+: Python is 30 years old
 
 ** Rust
-#+begin_src shell
-cargo install rust-script
-#+end_src
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :eval no-export
 (package-install 'ob-rust)
 #+end_src
 
 #+RESULTS:
 : ‘ob-rust’ is already installed
 
-#+begin_src rust :exports both
+TODO: cannot pass variable to rust
+
+#+begin_src rust :exports both :var year=thisyear :eval no-export
 fn main() {
-    println!("Rust in Emacs/orgmode");
+    println!("Rust is {} years old", 2021 - 2016);
 }
 #+end_src
 
+#+RESULTS:
+: Rust is 5 years old
+
 ** Go
 
-#+begin_src go
+TODO
+#+begin_src go :exports both
 package main
 import ("fmt")
 
@@ -287,6 +326,68 @@ func main(){
 #+end_src
 
 ** R
+TODO
+* Presenting with Org-beamer
+** Beamer
+In this section, I will try some beamer settings in orgmode.
+
+** latexmk version
+
+#+begin_src emacs-lisp :exports both :eval no-export
+(princ (concat (format "LaTeXmk version: %s\n"
+                       (eshell-command-result "latexmk --version") "\n")
+               (format "XeTeX version: %s\n"
+                       (eshell-command-result "xelatex --version") "\n")))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+LaTeXmk version: Latexmk, John Collins, 29 May 2021. Version 4.74b
+XeTeX version: XeTeX 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX)
+kpathsea version 6.3.3
+Copyright 2021 SIL International, Jonathan Kew and Khaled Hosny.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the XeTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the XeTeX source.
+Primary author of XeTeX: Jonathan Kew.
+Compiled with ICU version 68.2; using 68.2
+Compiled with zlib version 1.2.11; using 1.2.11
+Compiled with FreeType2 version 2.10.4; using 2.10.4
+Compiled with Graphite2 version 1.3.14; using 1.3.14
+Compiled with HarfBuzz version 2.7.4; using 2.7.4
+Compiled with libpng version 1.6.37; using 1.6.37
+Compiled with pplib version v2.05 less toxic i hope
+Compiled with fontconfig version 2.13.93; using 2.13.93
+#+end_example
+
+** simple slide
+
+This is a simple slide, with some formatted texts:
+- *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+  - *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+  - *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+    - *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+    - *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+    - *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+
+Enumerations:
+1. *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+   1. *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+   2. *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+      1. *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+      2. *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+      3. *important* _underline_ /slashed/ =code=  ~verbatim~ +deleted+ \alert{alert}
+
+** simple slide with definition
+
+It is not recommended to have second level definition bullet...
+- Beamer :: LaTeX package to generate slides
+- Orgmode :: Powerful plain text format
+  - org-babel :: Let Orgmode understand and evaluate programming languages
+  - ox-latex :: Exporter to export orgmode to latex and further to PDF
+
 * Conclusion
 ** Key Takeaways
 
