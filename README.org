@@ -198,6 +198,23 @@ Car -- Person : < owns
 #+RESULTS:
 [[file:images/triangle.svg]]
 
+** ditaa
+
+#+begin_src ditaa :output-dir images :file ditaa-process.svg :cmdline --svg -S -o :eval
+    +--------+   +-------+    +-------+
+    |cGRE    | --+ ditaa +--> |cFF0   |
+    |  Text  |   +-------+    |diagram|
+    |Document|   |!magic!|    |       |
+    |     {d}|   |       |    |       |
+    +---+----+   +-------+    +-------+
+        :                         ^
+        |       Lots of work      |
+        +-------------------------+
+#+end_src
+
+#+RESULTS:
+[[file:images/ditaa-process.svg]]
+
 * Org-babel Evaluating Programming Languages
 ** emacs lisp
 #+begin_src emacs-lisp :exports both :eval no-export
