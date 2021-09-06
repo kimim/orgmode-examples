@@ -170,7 +170,7 @@ Car -- Person : < owns
 :BEAMER_col: 0.5
 :END:
 #+name: tikz-triangle
-#+begin_src latex :exports code
+#+begin_src latex :exports code :eval no
 \begin{tikzpicture}
   \coordinate (A) at (0,0);
   \coordinate (B) at (60, 0);
@@ -199,8 +199,12 @@ Car -- Person : < owns
 [[file:images/triangle.svg]]
 
 ** ditaa
-
-#+begin_src ditaa :output-dir images :file ditaa-process.svg :cmdline --svg -S -o :eval
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+name: ditaa-process
+#+begin_src ditaa :exports code :eval no
     +--------+   +-------+    +-------+
     |cGRE    | --+ ditaa +--> |cFF0   |
     |  Text  |   +-------+    |diagram|
@@ -211,7 +215,13 @@ Car -- Person : < owns
         |       Lots of work      |
         +-------------------------+
 #+end_src
-
+*** output                                                            :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+begin_src ditaa :noweb yes :output-dir images :file ditaa-process.svg :cmdline --svg -S -o :eval no-export
+<<ditaa-process>>
+#+end_src
 #+RESULTS:
 [[file:images/ditaa-process.svg]]
 
@@ -221,8 +231,12 @@ Car -- Person : < owns
 (emacs-version)
 #+end_src
 
+#+RESULTS:
+: GNU Emacs 28.0.50 (build 6, x86_64-w64-mingw32)
+:  of 2021-08-31
+
 #+NAME: thisyear
-#+begin_src emacs-lisp :eval no-export
+#+begin_src emacs-lisp :exports both :eval no-export
 (decoded-time-year (decode-time (current-time)))
 #+end_src
 
@@ -404,6 +418,7 @@ It is not recommended to have second level definition bullet...
 - Orgmode :: Powerful plain text format
   - org-babel :: Let Orgmode understand and evaluate programming languages
   - ox-latex :: Exporter to export orgmode to latex and further to PDF
+
 
 * Conclusion
 ** Key Takeaways
