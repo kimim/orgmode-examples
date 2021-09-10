@@ -225,6 +225,39 @@ Car -- Person : < owns
 #+RESULTS:
 [[file:images/ditaa-process.svg]]
 
+** mermaid
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+Installation and Configuration, see [[https://github.com/kimim/kimim-emacs#mermaid][kimim-emacs#mermaid]]
+#+name: mermaid
+#+begin_src mermaid :exports code :eval no
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!
+#+end_src
+
+*** output                                                            :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+
+#+begin_src mermaid :noweb yes :file mermaid.svg :output-dir images :eval no-export
+<<mermaid>>
+#+end_src
+
+#+RESULTS:
+[[file:images/mermaid.svg]]
+
 * Org-babel Evaluating Programming Languages
 ** emacs lisp
 #+begin_src emacs-lisp :exports both :eval no-export
