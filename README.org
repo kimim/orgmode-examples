@@ -319,9 +319,9 @@ cout << "C++ is " << year-1979 << " years old" << endl;
 ** ClojureScript
 
 TODO
-#+begin_src clojurescript :exports both :var year=thisyear :eval no-export
-(println "ClojureScript is" (- 2021 2011) "years old")
-#+end_src
+# #+begin_src clojurescript :exports both :var year=thisyear :eval no-export
+# (println "ClojureScript is" (- 2021 2011) "years old")
+# #+end_src
 
 ** Java
 
@@ -375,7 +375,6 @@ fn main() {
 #+end_src
 
 #+RESULTS:
-: Rust is 5 years old
 
 ** Go
 
@@ -453,13 +452,30 @@ It is not recommended to have second level definition bullet...
   - ox-latex :: Exporter to export orgmode to latex and further to PDF
 
 
+** simple slide with wallpaper
+#+BEAMER: \ThisCenterWallPaper{1}{beamer/wallpaper}
+
+- This slide has a nice wallpaper.
+- It is the westlake in the morning.
+
+** some todo list
+- daily task [33%]
+  - [X] fetch the milk in the morning
+  - [ ] check the mailbox
+  - [ ] clean the garden
+- learning task [50%]
+  - [X] read the book
+  - [X] write the reading notes
+  - [ ] make a presentation
+  - [ ] present to students
 * Conclusion
 ** Key Takeaways
 
 - Emacs is a long lasting, and wonderful text editor
 - Orgmode is an awesome plain text format
-- \LaTeX{} and Beamer is great typesetting tool
-- Thus, drawing plantuml diagram with these tools is cool!
+- \LaTeX{} is great typesetting tool
+- Beamer is a \LaTeX{} package for preparing presentation
+- Thus, using these tools within Emacs is cool!
 
 * Appendix                                                       :B_appendix:
 :PROPERTIES:
