@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?> 
+<?xml-stylesheet href="latex-nm1wmI.css" type="text/css"?> 
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="113.81097pt" height="56.90549pt" viewBox="0.0 -56.90549 113.81097 56.90549 "> 
+<g transform="translate(0, 0.0 ) scale(1,-1) translate(0,56.90549 )"> 
+<g stroke="#000" fill="#000">
+ <g stroke-width="0.4">
+ <g stroke-width="0.0">
+ <path d=" M 0.0 0.0 M 0.0 0.0 L 0.0 -56.90549 L 113.81097 -56.90549 L 113.81097 0.0 Z M 113.81097 -56.90549  " stroke="none"/>
+ <clipPath id="pgfcp1"><path d=" M 0.0 0.0 M 0.0 0.0 L 0.0 -56.90549 L 113.81097 -56.90549 L 113.81097 0.0 Z M 113.81097 -56.90549  "/> </clipPath>
+ <g clip-path="url(#pgfcp1)">
+ <g transform="matrix(1,0,0,1,56.90549,-28.45274)">
+ <g transform="matrix(0.0,1.0,-1.0,0.0,0.0,0.0)">
+ <g transform="matrix(1.134,0,0,2.26802,0.0,0.0)">
+  <linearGradient id="pgfsh2" gradientTransform="rotate(90)">
+ <stop offset="0.0" stop-color=" #fff "/>
+ <stop offset="0.25" stop-color=" #fff "/>
+ <stop offset="0.5" stop-color=" #8080ff "/>
+ <stop offset="0.75" stop-color=" #00f "/>
+ <stop offset="1.0" stop-color=" #00f "/>
+ </linearGradient>
+ <g transform="translate(-50.1875,-50.1875)"> 
+ <rect width="100.375" height="100.375" style="fill:url(#pgfsh2); stroke:none"/>
+ </g> 
+ </g>
+ </g>
+ </g>
+ </g>
+ </g>
+ <g stroke="#ffb3b3" fill="#ffb3b3">
+ <g stroke-opacity="0.5">
+ <g fill-opacity="0.5">
+ <path d=" M 28.45274 -19.91684 M 42.67911 -19.91684 C 42.67911 -12.05974 36.30984 -5.69048 28.45274 -5.69048 C 20.59564 -5.69048 14.22638 -12.05974 14.22638 -19.91684 C 14.22638 -27.77394 20.59564 -34.1432 28.45274 -34.1432 C 36.30984 -34.1432 42.67911 -27.77394 42.67911 -19.91684 Z M 28.45274 -19.91684  " stroke="none"/>
+ </g>
+ </g>
+ </g>
+ <g stroke="#b3ffb3" fill="#b3ffb3">
+ <g stroke-opacity="0.5">
+ <g fill-opacity="0.5">
+ <path d=" M 21.06084 -32.72047 M 35.2872 -32.72047 C 35.2872 -24.86337 28.91794 -18.49411 21.06084 -18.49411 C 13.20374 -18.49411 6.83447 -24.86337 6.83447 -32.72047 C 6.83447 -40.57758 13.20374 -46.94684 21.06084 -46.94684 C 28.91794 -46.94684 35.2872 -40.57758 35.2872 -32.72047 Z M 21.06084 -32.72047  " stroke="none"/>
+ </g>
+ </g>
+ </g>
+ <g stroke="#b3b3ff" fill="#b3b3ff">
+ <g stroke-opacity="0.5">
+ <g fill-opacity="0.5">
+ <path d=" M 35.84465 -32.72047 M 50.07101 -32.72047 C 50.07101 -24.86337 43.70175 -18.49411 35.84465 -18.49411 C 27.98755 -18.49411 21.61829 -24.86337 21.61829 -32.72047 C 21.61829 -40.57758 27.98755 -46.94684 35.84465 -46.94684 C 43.70175 -46.94684 50.07101 -40.57758 50.07101 -32.72047 Z M 35.84465 -32.72047  " stroke="none"/>
+ </g>
+ </g>
+ </g>
+ </g>
+ </g>
+ 
+                                  </g> 
+</svg> 

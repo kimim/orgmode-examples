@@ -164,39 +164,54 @@ Car -- Person : < owns
 #+RESULTS:
 [[file:images/class-diagram.svg]]
 
-** tikz diagram
+** tikz logo
 *** code                                                              :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_col: 0.7
 :END:
 #+name: tikz-triangle
 #+begin_src latex :exports code :eval no
 \begin{tikzpicture}
-  \coordinate (A) at (0,0);
-  \coordinate (B) at (60, 0);
-  \coordinate (C) at (30, 30);
-  \foreach \density in {20,30,...,80}{%
-    \draw[fill=blue!\density]
-    (A)--(B)--(C)--cycle;
-    \path
-    (A) coordinate (X)
-    -- (B) coordinate[pos=.15](A)
-    -- (C) coordinate[pos=.15](B)
-    -- (X) coordinate[pos=.15](C);
-  }
+  \filldraw[blue] (0,0) rectangle (-4,-2);
+  \filldraw[blue,rotate=-30] (0,0) rectangle (1,-0.2);
+  \filldraw[blue] (-4,0) circle (0.2);
+  \filldraw[blue] (-4,-2) rectangle (-3,-3);
+  \filldraw[blue] (0,-2) rectangle (-1,-3);
+  \filldraw[blue] (-4,0) rectangle (-5.5,-1.5);
 \end{tikzpicture}
 #+end_src
 
 *** output                                                            :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.5
+:BEAMER_col: 0.3
 :END:
-#+begin_src latex :noweb yes :output-dir images :file triangle.svg :results file raw :exports results :eval no-export
+#+begin_src latex :noweb yes :output-dir images :file logo.svg :results file raw :exports results :eval no-export
 <<tikz-triangle>>
 #+end_src
 
 #+RESULTS:
-[[file:images/triangle.svg]]
+[[file:images/logo.svg]]
+
+** tikz background
+#+name: tikz-background
+#+begin_src latex :exports code :eval no
+\begin{tikzpicture}
+  \fill[left color=blue,right color=white,shading angle=90,line width=0] (0,0) rectangle (4,-2);
+  \begin{scope}[shift={(1,-1)}]
+    \fill[red!30!white,semitransparent]   ( 90:0.3) circle (0.5);
+    \fill[green!30!white,semitransparent] (210:0.3) circle (0.5);
+    \fill[blue!30!white,semitransparent]  (330:0.3) circle (0.5);
+  \end{scope}
+\end{tikzpicture}
+#+end_src
+
+#+begin_src latex :noweb yes :output-dir images :file background.svg :results file raw :exports results :eval no-export
+<<tikz-background>>
+#+end_src
+
+#+ATTR_LATEX: :width 0.4\paperwidth
+#+RESULTS:
+[[file:images/background.svg]]
 
 ** ditaa
 *** code                                                              :BMCOL:
@@ -390,8 +405,35 @@ func main(){
 
 ** R
 TODO
+* Org-babel for music and others
+** LilyPond
+*** code
+#+name: lilypond
+#+begin_src lilypond :exports code :eval no
+\relative c' {
+  \chordmode {c1}
+  \chordmode {d1}
+  \chordmode {e1}
+  \chordmode {f1}
+  \chordmode {g1}
+  \chordmode {a1}
+  \chordmode {b1}
+}
+#+end_src
+
+*** output
+#+begin_src lilypond :noweb yes :output-dir images :file chords.svg :cmdline --svg -dno-print-pages -dpreview :eval no-export
+<<lilypond>>
+#+end_src
+
+#+RESULTS:
+[[file:images/chords.svg]]
+
+** Math Equations
+
 * Presenting with Org-beamer
 ** Beamer
+
 In this section, I will try some beamer settings in orgmode.
 
 ** latexmk version
@@ -451,14 +493,20 @@ It is not recommended to have second level definition bullet...
   - org-babel :: Let Orgmode understand and evaluate programming languages
   - ox-latex :: Exporter to export orgmode to latex and further to PDF
 
-
 ** simple slide with wallpaper
 #+BEAMER: \ThisCenterWallPaper{1}{beamer/wallpaper}
 
 - This slide has a nice wallpaper.
 - It is the westlake in the morning.
 
+** full screen with a wallpaper                                 :B_fullframe:
+:PROPERTIES:
+:BEAMER_env: fullframe
+:END:
+#+BEAMER: \ThisCenterWallPaper{1}{beamer/wallpaper}
+
 ** some todo list
+
 - daily task [33%]
   - [X] fetch the milk in the morning
   - [ ] check the mailbox
@@ -468,6 +516,16 @@ It is not recommended to have second level definition bullet...
   - [X] write the reading notes
   - [ ] make a presentation
   - [ ] present to students
+
+** table
+
+#+attar_latex: :align c|l|r
+| \rotatebox{45}{enrollment to the class} | \rotatebox{45}{name} | \rotatebox{45}{date} |
+|-----------------------------------------+----------------------+----------------------|
+| x                                       | Kimi                 |           2021-09-18 |
+|                                         | Ivy                  |           2021-09-28 |
+| x                                       | Anna                 |           2021-09-20 |
+
 * Conclusion
 ** Key Takeaways
 
