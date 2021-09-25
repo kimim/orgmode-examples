@@ -407,7 +407,7 @@ func main(){
 TODO
 * Org-babel for music and others
 ** LilyPond
-*** code
+
 #+name: lilypond
 #+begin_src lilypond :exports code :eval no
 \relative c' {
@@ -421,7 +421,6 @@ TODO
 }
 #+end_src
 
-*** output
 #+begin_src lilypond :noweb yes :output-dir images :file chords.svg :cmdline --svg -dno-print-pages -dpreview :eval no-export
 <<lilypond>>
 #+end_src
