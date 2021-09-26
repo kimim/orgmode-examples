@@ -525,6 +525,51 @@ It is not recommended to have second level definition bullet...
 |                                         | Ivy                  |           2021-09-28 |
 | x                                       | Anna                 |           2021-09-20 |
 
+** 4 dimension
+*** up                                                            :B_columns:
+:PROPERTIES:
+:BEAMER_env: columns
+:END:
+**** up-left                                                  :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:BEAMER_env: block
+:END:
+- 1
+**** up-right                                                 :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:BEAMER_env: block
+:END:
+- 2
+*** down                                                          :B_columns:
+:PROPERTIES:
+:BEAMER_env: columns
+:END:
+**** down-left                                                :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:BEAMER_env: block
+:END:
+- 3
+**** down-right                                               :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:BEAMER_env: block
+:END:
+- 4
+** quote and quotation
+Quote:
+#+begin_quote
+If winter comes, can Spring be far behind?
+#+end_quote
+
+Quotation:
+#+begin_quotation
+History repeats itself, and that's one of the things that's wrong with
+history.
+#+end_quotation
+
 * Conclusion
 ** Key Takeaways
 
