@@ -501,6 +501,7 @@ It is not recommended to have second level definition bullet...
 ** full screen with a wallpaper                                 :B_fullframe:
 :PROPERTIES:
 :BEAMER_env: fullframe
+:BEAMER_OPT: plain
 :END:
 #+BEAMER: \ThisCenterWallPaper{1}{beamer/wallpaper}
 
@@ -558,6 +559,26 @@ It is not recommended to have second level definition bullet...
 :BEAMER_env: block
 :END:
 - 4
+** three columns
+*** col1                                                      :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.33
+:BEAMER_env: block
+:END:
+- left column occupies 33%
+*** col2                                                      :B_block:BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.33
+:BEAMER_env: block
+:END:
+- middle column occupies 33%
+*** col3                                                            :B_block:
+:PROPERTIES:
+:BEAMER_col: 0.33
+:BEAMER_env: block
+:END:
+- right column occupies 33%
+
 ** quote and quotation
 Quote:
 #+begin_quote
