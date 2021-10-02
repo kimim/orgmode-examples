@@ -11,6 +11,11 @@ To evaluate many features of orgmode, such as
 - drawing with code
 - evaluating results of code snippets
 - exporting orgmode file to pdf slides
+
+#+begin_quote
+All the orgmode "source text" is hosted in github: https://github.com/kimim/orgmode-examples
+#+end_quote
+
 ** How
 Following tools are used in this file:
 - [[https://www.msys2.org/][MSYS2]] provides many tools and libraries
@@ -18,7 +23,8 @@ Following tools are used in this file:
 - [[https://www.gnu.org/software/emacs/][GNU Emacs]] with [[https://github.com/kimim/kimim-emacs][kimim-emacs]] configuration
 - [[https://orgmode.org/][Org Mode]], including org-babel, org-export
 - [[http://tug.org/texlive/][TexLive]] with [[https://github.com/kimim/beamertheme-kimim][beamertheme-kimim]] style
-- [[https://plantuml.com/][PlantUML]], [[https://graphviz.org][Graphviz]], \LaTeX{} [[https://www.ctan.org/pkg/pgf][tikz]] package
+- [[https://plantuml.com/][PlantUML]], [[https://graphviz.org][Graphviz]], [[https://mermaid-js.github.io/mermaid/][Mermaid]], [[http://ditaa.sourceforge.net/][ditaa]], \LaTeX{} [[https://www.ctan.org/pkg/pgf][tikz]] package
+- [[http://lilypond.org][LilyPond]] for music notation
 - [[https://inkscape.org/][Inkscape]] to convert svg to pdf, during orgmode-pdf exporting
 
 * Preparation
@@ -428,8 +434,6 @@ TODO
 #+RESULTS:
 [[file:images/chords.svg]]
 
-** Math Equations
-
 * Presenting with Org-beamer
 ** Beamer
 
@@ -505,6 +509,67 @@ It is not recommended to have second level definition bullet...
 :END:
 #+BEAMER: \ThisCenterWallPaper{1}{beamer/wallpaper}
 
+** special blocks with heading - 1                             :B_againframe:
+*** block                                                           :B_block:
+:PROPERTIES:
+:BEAMER_env: block
+:END:
+- this is a block
+*** alert block                                                :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+- this is an alert block
+*** theorem block                                                 :B_theorem:
+:PROPERTIES:
+:BEAMER_env: theorem
+:END:
+- this is a theorem block
+*** proof                                                           :B_proof:
+:PROPERTIES:
+:BEAMER_env: proof
+:END:
+- This is proof
+
+** special blocks with heading - 2
+*** example                                                       :B_example:
+:PROPERTIES:
+:BEAMER_env: example
+:END:
+This is an example
+*** example block                                            :B_exampleblock:
+:PROPERTIES:
+:BEAMER_env: exampleblock
+:END:
+Example block
+*** definition                                                 :B_definition:
+:PROPERTIES:
+:BEAMER_env: definition
+:END:
+- this is a definition
+
+** special blocks without heading
+*** beamercolorbox                                         :B_beamercolorbox:
+:PROPERTIES:
+:BEAMER_env: beamercolorbox
+:END:
+- this is a beamercolorbox
+*** verse                                                           :B_verse:
+:PROPERTIES:
+:BEAMER_env: verse
+:END:
+verse is a poem?
+  maybe.
+*** quotation                                                   :B_quotation:
+:PROPERTIES:
+:BEAMER_env: quotation
+:END:
+Software is eating the world.
+*** quote                                                           :B_quote:
+:PROPERTIES:
+:BEAMER_env: quote
+:END:
+This is a quote.
 ** some todo list
 
 - daily task [33%]
