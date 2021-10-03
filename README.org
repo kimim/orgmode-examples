@@ -126,7 +126,9 @@ Installation seems OK. File generation OK
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-Let's draw a simple sequence diagram with this plantuml code:
+Let's draw a simple sequence diagram with this plantuml code. We will
+use noweb cite:ramsey1994literate technique here to add code from
+other place with ~<<name-of-code-snippet>>~.
 
 #+name: sequence-diagram
 #+begin_src plantuml :exports code :results output silent
@@ -383,6 +385,9 @@ cout << "C++ is " << year-1979 << " years old" << endl;
 
 ** Clojure
 
+According to Rich Hickey cite:hickey2020history, Clojure was initially
+designed in 2005:
+
 #+begin_src clojure :results output :exports both :var year=thisyear :eval no-export
 (println "Clojure is" (- year 2005) "years old")
 #+end_src
@@ -467,7 +472,11 @@ TODO
 * Org-babel for music and others
 ** Install LilyPond
 
-Get the installation file from https://lilypond.org/download.html and install it.
+LilyPond cite:nienhuys2003lilypond is a system for automated music
+engraving.
+
+You can get the installation file from
+https://lilypond.org/download.html and install it.
 
 Check the version:
 
