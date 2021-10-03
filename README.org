@@ -90,7 +90,7 @@ Download plantuml.jar[fn:6], and set jar-path
   :config
   (require 'plantuml-mode)
   ;; WARNING: if variables are from other package, setq them at :config
-  (setq org-plantuml-jar-path "./plantuml.jar)
+  (setq org-plantuml-jar-path "./plantuml.jar")
     (setq org-plantuml-executable-args "-headless -charset UTF-8")
     (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
     (add-to-list 'org-babel-load-languages '(plantuml . t)))
@@ -259,7 +259,7 @@ Configure mermaid in emacs
 :END:
 Installation and Configuration, see [[https://github.com/kimim/kimim-emacs#mermaid][kimim-emacs#mermaid]]
 #+name: mermaid
-#+begin_src mermaid :exports code :eval no
+#+Begin_src mermaid :exports code :eval no
 sequenceDiagram
     participant Alice
     participant Bob
