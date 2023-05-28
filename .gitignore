@@ -16,3 +16,8 @@ svg-inkscape
 *.snm
 *.toc
 *.xdv
+/.clj-kondo/
+/.cpcache/
+/.lsp/
+/ltximg/
+/plantuml.jar

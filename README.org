@@ -1,9 +1,10 @@
 #+TITLE: orgmode examples
 #+SUBTITLE: draw, code evaluation and present in orgmode with \LaTeX{} beamer
 #+AUTHOR: kimim
-#+STARTUP: content
+#+STARTUP: show3levels
 #+OPTIONS: H:2 toc:t num:t date:t author:t
 #+BEAMER_THEME: kimim
+#+bibliography: references.bib
 
 * Introduction
 ** Purpose
@@ -49,9 +50,9 @@ Firstly, let's check GNU Emacs[fn:1] and Orgmode[fn:2] version:
 #+end_src
 
 #+RESULTS:
-: GNU Emacs 29.0.50 (build 1, x86_64-w64-mingw32)
-:  of 2021-10-03
-: Orgmode 9.5
+: GNU Emacs 30.0.50 (build 12, x86_64-w64-mingw32)
+:  of 2023-01-21
+: Orgmode 9.6.1
 
 
 ** TexLive and Beamer Theme
@@ -74,7 +75,7 @@ inkscape --version
 #+end_src
 
 #+RESULTS:
-: Inkscape 1.1.1 (3bf5ae0d25, 2021-09-20)
+: Inkscape 1.1.2 (b8e25be833, 2022-02-05)
 
 * Drawing in code
 ** PlantUML settings in Emacs
@@ -107,14 +108,14 @@ Here is the version info on my machine, including JVM, dot and graphviz:
 
 #+RESULTS:
 #+begin_example
-PlantUML version 1.2021.8 (Sat Jun 26 16:20:59 CST 2021)
+PlantUML version 1.2022.3beta3 (Unknown compile time)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Default Encoding: GBK
+Default Encoding: Cp1252
 Language: en
 Country: US
-
+ 
 PLANTUML_LIMIT_SIZE: 4096
 
 Dot version: dot - graphviz version 2.44.1 (20200629.0846)
@@ -127,11 +128,11 @@ Installation seems OK. File generation OK
 :BEAMER_col: 0.5
 :END:
 Let's draw a simple sequence diagram with this plantuml code. We will
-use noweb cite:ramsey1994literate technique here to add code from
-other place with ~<<name-of-code-snippet>>~.
+use noweb cite:ramsey1994literate [cite:@ramsey1994literate] technique
+here to add code from other place with ~<<name-of-code-snippet>>~.
 
 #+name: sequence-diagram
-#+begin_src plantuml :exports code :results output silent
+#+begin_src plantuml :exports both :file alice-and-bob.svg :output-dir images :eval no-export
 @startuml
 hide footbox
 hide unlinked
@@ -146,11 +147,8 @@ Alice <-- Bob: Another authentication Response
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-#+begin_src plantuml :noweb yes :file alice-and-bob.svg :output-dir images :eval no-export
-<<sequence-diagram>>
-#+end_src
 
-#+RESULTS:
+#+RESULTS: sequence-diagram
 [[file:images/alice-and-bob.svg]]
 
 ** Class Diagram
@@ -161,7 +159,7 @@ Alice <-- Bob: Another authentication Response
 A simple class diagram
 
 #+name: class-diagram
-#+begin_src plantuml :exports code :results output silent
+#+begin_src plantuml :exports both :file class-diagram.svg :output-dir images :eval no-export
 @startuml
 class Car
 Driver - Car : drives >
@@ -174,11 +172,9 @@ Car -- Person : < owns
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-#+begin_src plantuml :noweb yes :file class-diagram.svg :output-dir images :eval no-export
-<<class-diagram>>
-#+end_src
 
-#+RESULTS:
+
+#+RESULTS: class-diagram
 [[file:images/class-diagram.svg]]
 
 ** ditaa settings in Emacs
@@ -205,7 +201,7 @@ Download ditaa.jar[fn:7], and set jar-path
 :BEAMER_col: 0.5
 :END:
 #+name: ditaa-process
-#+begin_src ditaa :exports code :eval no
+#+begin_src ditaa :exports both :output-dir images :file ditaa-process.svg :cmdline --svg -S -o :eval no-export
     +--------+   +-------+    +-------+
     |cGRE    | --+ ditaa +--> |cFF0   |
     |  Text  |   +-------+    |diagram|
@@ -220,15 +216,14 @@ Download ditaa.jar[fn:7], and set jar-path
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-#+begin_src ditaa :noweb yes :output-dir images :file ditaa-process.svg :cmdline --svg -S -o :eval no-export
-<<ditaa-process>>
-#+end_src
-#+RESULTS:
+
+#+RESULTS: ditaa-process
 [[file:images/ditaa-process.svg]]
 
 ** mermaid settings in Emacs
 
 Install mermaid with npm:
+
 #+begin_src sh
 npm install -g @mermaid-js/mermaid-cli
 #+end_src
@@ -244,7 +239,7 @@ Configure mermaid in emacs
 
 ** mermaid version
 
-#+begin_src emacs-lisp :exports outputs :eval no-export
+#+begin_src emacs-lisp :exports both :eval no-export
 (shell-command-to-string
  (concat ob-mermaid-cli-path " --version"))
 #+end_src
@@ -259,7 +254,7 @@ Configure mermaid in emacs
 :END:
 Installation and Configuration, see [[https://github.com/kimim/kimim-emacs#mermaid][kimim-emacs#mermaid]]
 #+name: mermaid
-#+Begin_src mermaid :exports code :eval no
+#+begin_src mermaid :exports both :output-dir images :file mermaid.svg :eval no-export
 sequenceDiagram
     participant Alice
     participant Bob
@@ -278,20 +273,17 @@ sequenceDiagram
 :BEAMER_col: 0.5
 :END:
 
-#+begin_src mermaid :noweb yes :file mermaid.svg :output-dir images :eval no-export
-<<mermaid>>
-#+end_src
-
-#+RESULTS:
+#+RESULTS: mermaid
 [[file:images/mermaid.svg]]
 
 ** tikz logo
 *** code                                                              :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.7
+:BEAMER_col: 0.5
 :END:
-#+name: tikz-triangle
-#+begin_src latex :exports code :eval no
+#+name: tikz-logo
+#+header: :headers '("\\usepackage{tikz}")
+#+begin_src latex :exports both :output-dir images :file logo.svg :results file raw :eval no-export
 \begin{tikzpicture}
   \filldraw[blue] (0,0) rectangle (-4,-2);
   \filldraw[blue,rotate=-30] (0,0) rectangle (1,-0.2);
@@ -304,18 +296,21 @@ sequenceDiagram
 
 *** output                                                            :BMCOL:
 :PROPERTIES:
-:BEAMER_col: 0.3
+:BEAMER_col: 0.5
 :END:
-#+begin_src latex :noweb yes :output-dir images :file logo.svg :results file raw :exports results :eval no-export
-<<tikz-triangle>>
-#+end_src
 
-#+RESULTS:
+#+RESULTS: tikz-logo
 [[file:images/logo.svg]]
 
+
 ** tikz background
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
 #+name: tikz-background
-#+begin_src latex :exports code :eval no
+#+header: :headers '("\\usepackage{tikz}")
+#+begin_src latex :exports both :output-dir images :file background.svg :results file raw :exports results :eval no-export
 \begin{tikzpicture}
   \fill[left color=blue,right color=white,shading angle=90,line width=0] (0,0) rectangle (4,-2);
   \begin{scope}[shift={(1,-1)}]
@@ -326,16 +321,37 @@ sequenceDiagram
 \end{tikzpicture}
 #+end_src
 
-#+begin_src latex :noweb yes :output-dir images :file background.svg :results file raw :exports results :eval no-export
-<<tikz-background>>
-#+end_src
+*** output                                                            :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
 
 #+ATTR_LATEX: :width 0.4\paperwidth
-#+RESULTS:
+#+RESULTS: tikz-background
 [[file:images/background.svg]]
 
+* Equations
+** latex equation
+
+\begin{equation}
+\binom{n}{r}=\dbinom{n}{n-r}=\mathrm{C}_n^r=\mathrm{C}_n^{n-r}
+\end{equation}
+
 * Org-babel Evaluating Programming Languages
-** emacs lisp
+** shell
+#+begin_src shell :results verbatim :exports both :eval no-export
+sh --version
+#+end_src
+
+#+RESULTS:
+: GNU bash, version 5.1.8(1)-release (x86_64-pc-msys)
+: Copyright (C) 2020 Free Software Foundation, Inc.
+: License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+:
+: This is free software; you are free to change and redistribute it.
+: There is NO WARRANTY, to the extent permitted by law.
+
+** emacs lisp - get current year
 #+begin_src emacs-lisp :exports both :eval no-export
 (emacs-version)
 #+end_src
@@ -350,21 +366,176 @@ sequenceDiagram
 #+end_src
 
 #+RESULTS: thisyear
-: 2021
+: 2023
 
+** Babashka
 
-** shell
-#+begin_src shell :results verbatim :exports both :eval no-export
-sh --version
+[[https://babashka.org][Babashka]] is a fast native Clojure scripting runtime, developed by
+Michiel Borkent.
+
+#+begin_src bb :results output :exports both :var year=thisyear :eval no-export
+(println "Babashka is" (- year 2019) "years old")
 #+end_src
 
 #+RESULTS:
-: GNU bash, version 5.1.8(1)-release (x86_64-pc-msys)
-: Copyright (C) 2020 Free Software Foundation, Inc.
-: License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-:
-: This is free software; you are free to change and redistribute it.
-: There is NO WARRANTY, to the extent permitted by law.
+: Babashka is 4 years old
+
+
+** Babashka - Word Frequency
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+We use babashka to read this README.org file, and list the top
+frequent characters in this file. Then we use several programming
+language to generate a bar chart from the result table of this code.
+
+#+name: char-table
+#+begin_src bb :results table :exports both :var year=thisyear :eval no-export
+(require '[clojure.string :as str])
+(-> (slurp "README.org")
+    (str/split #"")
+    (->>
+     (filter #(re-matches #"\w" %)))
+     (frequencies)
+    (->>
+     (sort-by val)
+     (reverse)
+     (take 10)))
+#+end_src
+
+*** output                                                            :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+RESULTS: char-table
+| e | 1604 |
+| t | 1116 |
+| a | 1069 |
+| o | 1009 |
+| r |  948 |
+| i |  924 |
+| s |  870 |
+| n |  861 |
+| l |  786 |
+| c |  565 |
+
+** Clojure
+
+According to Rich Hickey cite:hickey2020history, Clojure was initially
+designed in 2005:
+
+#+begin_src clojure :results output :exports both :var year=thisyear :eval no-export
+(println "Clojure is" (- year 2005) "years old")
+#+end_src
+
+#+RESULTS:
+: Clojure is 18 years old
+
+** Clojure - get table
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+name: char-table-clojure
+#+begin_src clojure :var tbl=char-table :results output :exports both
+(doseq [item tbl]
+  (println (first item) "\t" (second item)))
+#+end_src
+
+*** output                                                            :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+RESULTS: char-table-clojure
+#+begin_example
+e 	 1625
+t 	 1129
+a 	 1084
+o 	 1014
+r 	 966
+i 	 934
+s 	 879
+n 	 867
+l 	 796
+c 	 577
+#+end_example
+
+** Clojure - chart
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+NAME: clojure-chart
+#+HEADER: :output-dir images :file clojure-chart.svg
+#+begin_src clojure :var tbl=char-table :results file :exports both :eval no-export
+(require '[clj-chart.chart :as chart])
+(require '[clj-chart.plot :as plot])
+(let [x (map first tbl)
+      y (map second tbl)
+      chart (chart/bar
+             {:series [{:name "char-freq"
+                        :xs x :ys y}]})]
+  (plot/store! chart nil "images/clojure-chart.svg"))
+#+end_src
+*** output                                                            :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+RESULTS: clojure-chart
+[[file:images/clojure-chart.svg]]
+
+** ClojureScript
+
+TODO
+# #+begin_src clojurescript :exports both :var year=thisyear :eval no-export
+# (println "ClojureScript is" (- 2021 2011) "years old")
+# #+end_src
+
+** Python Version
+
+Check Python version in shell:
+#+begin_src shell :exports both :eval no-export
+python --version
+#+end_src
+
+#+RESULTS:
+: Python 3.10.11
+
+Evaluate Python code:
+#+begin_src python :results output :exports both :var year=thisyear :eval no-export
+print("Python is " + str(year - 1991) + " years old")
+#+end_src
+
+#+RESULTS:
+: Python is 30 years old
+
+** Python pyplot
+*** code                                                              :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+
+#+NAME: python-pyplot
+#+HEADER: :output-dir images :file python-pyplot.svg
+#+begin_src python :var tbl=char-table :results file graphics :exports both
+import matplotlib.pyplot as plt
+import pandas as pd
+data = pd.DataFrame(tbl)
+fig=plt.figure(figsize=(4,2))
+fig.tight_layout()
+plt.bar(data[0], data[1])
+fgname = 'images/python-pyplot.svg'
+plt.savefig(fgname)
+#+end_src
+
+*** output                                                            :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+
+#+RESULTS: python-pyplot
+[[file:images/python-pyplot.svg]]
 
 ** C
 
@@ -383,25 +554,6 @@ cout << "C++ is " << year-1979 << " years old" << endl;
 #+RESULTS:
 : C++ is 42 years old
 
-** Clojure
-
-According to Rich Hickey cite:hickey2020history, Clojure was initially
-designed in 2005:
-
-#+begin_src clojure :results output :exports both :var year=thisyear :eval no-export
-(println "Clojure is" (- year 2005) "years old")
-#+end_src
-
-#+RESULTS:
-: Clojure is 16 years old
-
-** ClojureScript
-
-TODO
-# #+begin_src clojurescript :exports both :var year=thisyear :eval no-export
-# (println "ClojureScript is" (- 2021 2011) "years old")
-# #+end_src
-
 ** Java
 
 TODO: can pass variable to java
@@ -418,24 +570,6 @@ public class Main{
 #+RESULTS:
 : Java is 26 years old
 
-** Python
-
-Check Python version in shell:
-#+begin_src shell :exports both :eval no-export
-python --version
-#+end_src
-
-#+RESULTS:
-: Python 3.9.6
-
-Evaluate Python code:
-#+begin_src python :results output :exports both :var year=thisyear :eval no-export
-print("Python is " + str(year - 1991) + " years old")
-#+end_src
-
-#+RESULTS:
-: Python is 30 years old
-
 ** Rust
 
 #+begin_src emacs-lisp :eval no-export
@@ -443,7 +577,7 @@ print("Python is " + str(year - 1991) + " years old")
 #+end_src
 
 #+RESULTS:
-: ‘ob-rust’ is already installed
+: Package ‘ob-rust’ installed.
 
 TODO: cannot pass variable to rust
 
@@ -454,6 +588,7 @@ fn main() {
 #+end_src
 
 #+RESULTS:
+: Rust is 5 years old
 
 ** Go
 
@@ -503,7 +638,7 @@ information.
 ** LilyPond
 
 #+name: lilypond
-#+begin_src lilypond :exports code :eval no
+#+begin_src lilypond :exports both :output-dir images :file chords.svg :cmdline --svg -dno-print-pages -dpreview :eval no-export
 \relative c' {
   \chordmode {c1}
   \chordmode {d1}
@@ -515,11 +650,7 @@ information.
 }
 #+end_src
 
-#+begin_src lilypond :noweb yes :output-dir images :file chords.svg :cmdline --svg -dno-print-pages -dpreview :eval no-export
-<<lilypond>>
-#+end_src
-
-#+RESULTS:
+#+RESULTS: lilypond
 [[file:images/chords.svg]]
 
 * Presenting with Org-beamer
@@ -538,7 +669,8 @@ In this section, I will try some beamer settings in orgmode.
 
 #+RESULTS:
 #+begin_example
-LaTeXmk version: Latexmk, John Collins, 29 May 2021. Version 4.74b
+Latexmk, John Collins, 20 November 2021. Version 4.76
+
 XeTeX version: XeTeX 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX)
 kpathsea version 6.3.3
 Copyright 2021 SIL International, Jonathan Kew and Khaled Hosny.
@@ -548,14 +680,7 @@ the Lesser GNU General Public License.
 For more information about these matters, see the file
 named COPYING and the XeTeX source.
 Primary author of XeTeX: Jonathan Kew.
-Compiled with ICU version 68.2; using 68.2
-Compiled with zlib version 1.2.11; using 1.2.11
-Compiled with FreeType2 version 2.10.4; using 2.10.4
-Compiled with Graphite2 version 1.3.14; using 1.3.14
-Compiled with HarfBuzz version 2.7.4; using 2.7.4
-Compiled with libpng version 1.6.37; using 1.6.37
-Compiled with pplib version v2.05 less toxic i hope
-Compiled with fontconfig version 2.13.93; using 2.13.93
+...
 #+end_example
 
 ** simple slide
@@ -670,7 +795,7 @@ This is a quote.
   - [ ] make a presentation
   - [ ] present to students
 
-** table
+** table rotated title
 
 #+attar_latex: :align c|l|r
 | \rotatebox{45}{enrollment to the class} | \rotatebox{45}{name} | \rotatebox{45}{date} |
@@ -678,6 +803,22 @@ This is a quote.
 | x                                       | Kimi                 |           2021-09-18 |
 |                                         | Ivy                  |           2021-09-28 |
 | x                                       | Anna                 |           2021-09-20 |
+** table fixed width
+
+** table formula
+
+|           |        |   |   |   |
+|-----------+--------+---+---+---|
+|         2 |      1 |   |   |   |
+|         2 |        |   |   |   |
+|         2 |      1 |   |   |   |
+|-----------+--------+---+---+---|
+| [2, 2, 2] | [1, 1] |   |   |   |
+|         3 |      2 |   |   |   |
+|         6 |      2 |   |   |   |
+#+TBLFM: @5$1=(@I..II)::@5$2=(@I..II)
+#+TBLFM: @6$1='(length '(@I..II))::@6$2='(length '(@I..II))
+#+TBLFM: @7$1='(apply '+ '(@I..II));N::@7$2='(apply '+ '(@I..II));N
 
 ** 4 dimension
 *** up                                                            :B_columns:
@@ -854,6 +995,10 @@ Asleep the bodily soul goes roaming, awake it opens through our form.
 \fi
 \printbibliography
 #+END_EXPORT
+
+** OC References
+
+#+print_bibliography:
 
 * Footnotes
 

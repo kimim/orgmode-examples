@@ -1,0 +1,2 @@
+{:deps
+ {io.github.kimim/clj-chart {:mvn/version "0.1.9"}}}
