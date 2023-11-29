@@ -21,3 +21,4 @@ svg-inkscape
 /.lsp/
 /ltximg/
 /plantuml.jar
+/.nrepl-port
