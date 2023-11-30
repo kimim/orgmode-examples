@@ -84,7 +84,7 @@ inkscape --version
 ** PlantUML settings in Emacs
 
 Download plantuml.jar[fn:6], and set jar-path
-#+begin_src emacs-lisp :exports code :eval no-export
+#+begin_src emacs-lisp :exports code :eval no
 (require 'url-handlers)
 (url-copy-file "https://nchc.dl.sourceforge.net/project/plantuml/plantuml.jar"
                "./plantuml.jar" t)
@@ -183,7 +183,7 @@ Car -- Person : < owns
 ** ditaa settings in Emacs
 
 Download ditaa.jar[fn:7], and set jar-path
-#+begin_src emacs-lisp :exports code :eval no-export
+#+begin_src emacs-lisp :exports code :eval no
 (require 'url-handlers)
 (url-copy-file "https://sourceforge.net/projects/ditaa/files/latest/download"
                "./ditaa.zip" t)
