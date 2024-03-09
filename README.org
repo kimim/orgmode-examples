@@ -151,6 +151,7 @@ Alice <-- Bob: Another authentication Response
 :BEAMER_col: 0.5
 :END:
 
+#+attr_latex: :width \textwidth
 #+RESULTS: sequence-diagram
 [[file:images/alice-and-bob.svg]]
 
@@ -176,7 +177,7 @@ Car -- Person : < owns
 :BEAMER_col: 0.5
 :END:
 
-
+#+attr_latex: :width \textwidth
 #+RESULTS: class-diagram
 [[file:images/class-diagram.svg]]
 
@@ -221,6 +222,7 @@ Download ditaa.jar[fn:7], and set jar-path
 :BEAMER_col: 0.5
 :END:
 
+#+attr_latex: :width \textwidth
 #+RESULTS: ditaa-process
 [[file:images/ditaa-process.svg]]
 
@@ -302,7 +304,7 @@ sequenceDiagram
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-
+#+attr_latex: :width \textwidth
 #+RESULTS: tikz-logo
 [[file:images/logo.svg]]
 
@@ -329,8 +331,7 @@ sequenceDiagram
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-
-#+ATTR_LATEX: :width 0.4\paperwidth
+#+attr_latex: :width \textwidth
 #+RESULTS: tikz-background
 [[file:images/background.svg]]
 
@@ -493,6 +494,7 @@ c 	 582
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
+#+attr_latex: :width \textwidth
 #+RESULTS: clojure-chart
 [[file:images/clojure-chart.svg]]
 
@@ -544,7 +546,7 @@ plt.savefig(fgname)
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-
+#+attr_latex: :width \textwidth
 #+RESULTS: python-pyplot
 [[file:images/python-pyplot.svg]]
 
