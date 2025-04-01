@@ -743,14 +743,14 @@ It is not recommended to have second level definition bullet...
 - This slide has a nice wallpaper.
 - It is the westlake in the morning.
 
-** full screen with a wallpaper                                  :B_fullframe:
+** full screen with a wallpaper                          :B_fullframe:
 :PROPERTIES:
 :BEAMER_env: fullframe
 :BEAMER_OPT: plain
 :END:
 #+BEAMER: \ThisCenterWallPaper{1}{beamer/wallpaper}
 
-** special blocks with heading - 1                              :B_againframe:
+** special blocks with heading - 1                      :B_againframe:
 *** block                                                           :B_block:
 :PROPERTIES:
 :BEAMER_env: block
@@ -1007,7 +1007,7 @@ Asleep the bodily soul goes roaming, awake it opens through our form.
 - Beamer is a \LaTeX{} package for preparing presentation
 - Thus, using these tools within Emacs is cool!
 
-* Appendix                                                       :B_appendix:
+* Appendix                                                :B_appendix:
 :PROPERTIES:
 :BEAMER_env: appendix
 :END:
