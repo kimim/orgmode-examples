@@ -849,52 +849,65 @@ This is a quote.
 #+TBLFM: @7$1='(apply '+ '(@I..II));N::@7$2='(apply '+ '(@I..II));N
 
 ** 4 dimension
-*** up                                                            :B_columns:
+*** up                                                   :B_columns:
 :PROPERTIES:
 :BEAMER_env: columns
 :END:
-**** up-left                                                  :B_block:BMCOL:
+**** up-left                                        :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
 :BEAMER_env: block
 :END:
 - 1
-**** up-right                                                 :B_block:BMCOL:
+**** up-right                                       :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
 :BEAMER_env: block
 :END:
 - 2
-*** down                                                          :B_columns:
+*** down                                                 :B_columns:
 :PROPERTIES:
 :BEAMER_env: columns
 :END:
-**** down-left                                                :B_block:BMCOL:
+**** down-left                                      :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
 :BEAMER_env: block
 :END:
 - 3
-**** down-right                                               :B_block:BMCOL:
+**** down-right                                     :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.5
 :BEAMER_env: block
 :END:
 - 4
+** 2 columns using beamer command
+#+beamer: \begin{columns}[t]\column{0.5\columnwidth}
+*Left*
+- A
+- B
+- C
+#+beamer: \column{0.5\columnwidth}
+*Right*
+- D
+- E
+- F
+#+beamer: \end{columns}
+
 ** three columns
-*** col1                                                      :B_block:BMCOL:
+*** col1                                             :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.33
 :BEAMER_env: block
 :END:
 - left column occupies 33%
-*** col2                                                      :B_block:BMCOL:
+*** col2                                             :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.33
 :BEAMER_env: block
 :END:
 - middle column occupies 33%
-*** col3                                                            :B_block:
+*** col3                                             :B_block:BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.33
 :BEAMER_env: block
@@ -944,7 +957,7 @@ You can also add ~<3->~ before each item to set the order:
 :BEAMER_act: [<+->]
 :END:
 #+BEAMER: \setbeamercovered{highly dynamic}
-*** col1                                                              :BMCOL:
+*** col1                                                     :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.33
 :END:
@@ -956,7 +969,7 @@ When the Dao works in the world, the sage man works his ways,
 
 When the Dao has disappeared the Sage lives out his days.
 
-*** col2                                                              :BMCOL:
+*** col2                                                     :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.33
 :END:
@@ -967,7 +980,7 @@ Good fortune's lighter than a feather, but none knows how to bear it,
 Disaster's heavier than the earth, but none knows how to dodge it.
 
 
-*** col3                                                              :BMCOL:
+*** col3                                                     :BMCOL:
 :PROPERTIES:
 :BEAMER_col: 0.33
 :END:

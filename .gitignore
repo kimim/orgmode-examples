@@ -23,3 +23,4 @@ svg-inkscape
 /plantuml.jar
 /.nrepl-port
 *.pdf
+*.bbl-SAVE-ERROR
